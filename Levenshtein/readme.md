@@ -11,7 +11,7 @@ Levenshtein Distance in C and MySQL based on the following wiki articles:
 
 	The C implementation (same as the one in above [Wikibooks page](https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C)).
 
-* edit\_distance.sql, edit\_distance\long.sql
+* edit\_distance.sql, edit\_distance\_long.sql
 
 	The MySQL implementation.
 
@@ -55,6 +55,8 @@ Queries taken from test.sql:
 
 SELECT edit_distance_case('Hello','hello'), edit_distance_case_ratio('Hello','hello'),
 	edit_distance('Hello','hello'), edit_distance_ratio('Hello','hello'),
+	edit_distance_long_case('Hello','hello'), edit_distance_long_case_ratio('Hello','hello'),
+	edit_distance_long('Hello','hello'), edit_distance_long_ratio('Hello','hello'),
 	levenshtein('Hello','hello'), levenshtein_ratio('Hello','hello');
 
 SELECT word, edit_distance_case_ratio(word, 'Baylor/M') AS ratio
@@ -63,6 +65,16 @@ ORDER BY ratio DESC
 LIMIT 100;
 
 SELECT word, edit_distance_ratio(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
+
+SELECT word, edit_distance_long_case_ratio(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
+
+SELECT word, edit_distance_long_ratio(word, 'Baylor/M') AS ratio
 FROM en_us_dict
 ORDER BY ratio DESC
 LIMIT 100;
