@@ -1,3 +1,5 @@
+-- https://github.com/zufuliu/algorithm.git
+-- originally taken from
 -- https://snippets.aktagon.com/snippets/610-levenshtein-distance-for-mysql
 
 DELIMITER $$

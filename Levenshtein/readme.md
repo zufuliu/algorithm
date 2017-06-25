@@ -11,11 +11,11 @@ Levenshtein Distance in C and MySQL based on the following wiki articles:
 
 	The C implementation (same as the one in above [Wikibooks page](https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C)).
 
-* edit\_distance.sql
+* edit\_distance.sql, edit\_distance\long.sql
 
 	The MySQL implementation.
 
-* edit\_distance\_case.sql
+* edit\_distance\_case.sql, edit\_distance\_long\_case.sql
 
 	Case sensitive implementation in MySQL.
 
@@ -73,3 +73,7 @@ ORDER BY ratio DESC
 LIMIT 100;
 
 ```
+
+## Notice
+
+You may need to change `CHARSET utf32` to other appropriate types.

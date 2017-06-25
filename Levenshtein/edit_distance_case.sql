@@ -1,4 +1,5 @@
 -- Levenshtein distance for MySQL (case sensitive)
+-- https://github.com/zufuliu/algorithm.git
 -- based on the C implementation in following wiki articles:
 -- https://en.wikipedia.org/wiki/Levenshtein_distance
 -- https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance

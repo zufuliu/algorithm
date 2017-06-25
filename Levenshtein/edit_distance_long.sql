@@ -6,9 +6,9 @@
 
 DELIMITER $$
 
-CREATE FUNCTION `edit_distance`(
-	`s1` VARCHAR(255) CHARSET utf32,
-	`s2` VARCHAR(255) CHARSET utf32
+CREATE FUNCTION `edit_distance_long`(
+	`s1` VARCHAR(16382) CHARSET utf32,
+	`s2` VARCHAR(16382) CHARSET utf32
 )
 RETURNS INT
 LANGUAGE SQL
@@ -20,7 +20,7 @@ BEGIN
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
 	DECLARE s2_ch CHAR(1) CHARSET utf32;
-	DECLARE col VARBINARY(256) DEFAULT ' ';
+	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT ' ';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
 	-- https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
@@ -62,9 +62,9 @@ BEGIN
 	RETURN s1_len;
 END$$
 
-CREATE FUNCTION `edit_distance_ratio`(
-	`s1` VARCHAR(255) CHARSET utf32,
-	`s2` VARCHAR(255) CHARSET utf32
+CREATE FUNCTION `edit_distance_long_ratio`(
+	`s1` VARCHAR(16382) CHARSET utf32,
+	`s2` VARCHAR(16382) CHARSET utf32
 )
 RETURNS INT
 LANGUAGE SQL
@@ -76,7 +76,7 @@ BEGIN
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
 	DECLARE s2_ch CHAR(1) CHARSET utf32;
-	DECLARE col VARBINARY(256) DEFAULT ' ';
+	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT ' ';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
 	-- https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
