@@ -33,7 +33,7 @@ Levenshtein Distance in C and MySQL based on the following wiki articles:
 
 * en\_us\_dict.py, ce\_dict.py, util.py
 
-	Python script to parse and build test data import SQL query.
+	Python scripts to parse and build test data import SQL query.
 
 ## Used Test Data
 
@@ -53,23 +53,23 @@ Queries taken from test.sql:
 
 ```SQL
 
-	SELECT edit_distance_case('Hello','hello'), edit_distance_case_ratio('Hello','hello'),
-		edit_distance('Hello','hello'), edit_distance_ratio('Hello','hello'),
-		levenshtein('Hello','hello'), levenshtein_ratio('Hello','hello');
+SELECT edit_distance_case('Hello','hello'), edit_distance_case_ratio('Hello','hello'),
+	edit_distance('Hello','hello'), edit_distance_ratio('Hello','hello'),
+	levenshtein('Hello','hello'), levenshtein_ratio('Hello','hello');
 
-	SELECT word, edit_distance_case_ratio(word, 'Baylor/M') AS ratio
-	FROM en_us_dict
-	ORDER BY ratio DESC
-	LIMIT 100;
+SELECT word, edit_distance_case_ratio(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
 
-	SELECT word, edit_distance_ratio(word, 'Baylor/M') AS ratio
-	FROM en_us_dict
-	ORDER BY ratio DESC
-	LIMIT 100;
+SELECT word, edit_distance_ratio(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
 
-	SELECT word, levenshtein_ratio(word, 'Baylor/M') AS ratio
-	FROM en_us_dict
-	ORDER BY ratio DESC
-	LIMIT 100;
+SELECT word, levenshtein_ratio(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
 
 ```
