@@ -3,6 +3,7 @@
 ## Algorithm List
 
 * Levenshtein Distance
+* Text Similarity in PHP
 
 ## License
 

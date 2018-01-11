@@ -19,7 +19,7 @@ BEGIN
 	DECLARE s1_len, s2_len INT;
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
-	DECLARE s2_ch CHAR(1) CHARSET utf32;
+	DECLARE s2_ch INT;
 	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT ' ';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
@@ -38,15 +38,19 @@ BEGIN
 		SET y = y + 1;
 	END WHILE;
 
+	-- case insensitive
+	SET s1 = LOWER(s1);
+	SET s2 = LOWER(s2);
+
 	SET x = 1;
 	WHILE x <= s2_len DO
 		SET col = CONCAT(CHAR(x), SUBSTRING(col, 2));
-		SET s2_ch = SUBSTRING(s2, x, 1);
+		SET s2_ch = ORD(SUBSTRING(s2, x, 1));
 		SET last_diag = x - 1;
 		SET y = 1;
 		WHILE y <= s1_len DO
 			SET old_diag = ORD(SUBSTRING(col, y + 1, 1));
-			IF s2_ch != SUBSTRING(s1, y, 1) THEN
+			IF s2_ch != ORD(SUBSTRING(s1, y, 1)) THEN
 				SET last_diag = last_diag + 1;
 			END IF;
 			SET last_diag = LEAST(LEAST(old_diag + 1, ORD(SUBSTRING(col, y, 1)) + 1), last_diag);
@@ -75,7 +79,7 @@ BEGIN
 	DECLARE s1_len, s2_len INT;
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
-	DECLARE s2_ch CHAR(1) CHARSET utf32;
+	DECLARE s2_ch INT;
 	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT ' ';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
@@ -97,15 +101,19 @@ BEGIN
 		SET y = y + 1;
 	END WHILE;
 
+	-- case insensitive
+	SET s1 = LOWER(s1);
+	SET s2 = LOWER(s2);
+
 	SET x = 1;
 	WHILE x <= s2_len DO
 		SET col = CONCAT(CHAR(x), SUBSTRING(col, 2));
-		SET s2_ch = SUBSTRING(s2, x, 1);
+		SET s2_ch = ORD(SUBSTRING(s2, x, 1));
 		SET last_diag = x - 1;
 		SET y = 1;
 		WHILE y <= s1_len DO
 			SET old_diag = ORD(SUBSTRING(col, y + 1, 1));
-			IF s2_ch != SUBSTRING(s1, y, 1) THEN
+			IF s2_ch != ORD(SUBSTRING(s1, y, 1)) THEN
 				SET last_diag = last_diag + 1;
 			END IF;
 			SET last_diag = LEAST(LEAST(old_diag + 1, ORD(SUBSTRING(col, y, 1)) + 1), last_diag);
