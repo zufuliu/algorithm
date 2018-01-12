@@ -7,15 +7,15 @@ Levenshtein Distance in C and MySQL based on the following wiki articles:
 
 ## File List
 
-* edit\_dist.c
+* levenshtein.c
 
 	The C implementation (same as the one in above [Wikibooks page](https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C)).
 
-* edit\_distance.sql, edit\_distance\_long.sql
+* levenshtein.sql, levenshtein\_long.sql
 
 	The MySQL implementation.
 
-* edit\_distance\_case.sql, edit\_distance\_long\_case.sql
+* levenshtein\_case.sql, levenshtein\_long\_case.sql
 
 	Case sensitive implementation in MySQL.
 
@@ -53,33 +53,27 @@ Queries taken from test.sql:
 
 ```SQL
 
-SELECT edit_distance_case('Hello','hello'), edit_distance_case_ratio('Hello','hello'),
-	edit_distance('Hello','hello'), edit_distance_ratio('Hello','hello'),
-	edit_distance_long_case('Hello','hello'), edit_distance_long_case_ratio('Hello','hello'),
-	edit_distance_long('Hello','hello'), edit_distance_long_ratio('Hello','hello'),
-	levenshtein('Hello','hello'), levenshtein_ratio('Hello','hello');
+SELECT levenshtein_case('Hello','hello'), levenshtein_case_ratio('Hello','hello'),
+	levenshtein('Hello','hello'), levenshtein_ratio('Hello','hello'),
+	levenshtein_long_case('Hello','hello'), levenshtein_long_case_ratio('Hello','hello'),
+	levenshtein_long('Hello','hello'), levenshtein_long_ratio('Hello','hello');
 
-SELECT word, edit_distance_case_ratio(word, 'Baylor/M') AS ratio
-FROM en_us_dict
-ORDER BY ratio DESC
-LIMIT 100;
-
-SELECT word, edit_distance_ratio(word, 'Baylor/M') AS ratio
-FROM en_us_dict
-ORDER BY ratio DESC
-LIMIT 100;
-
-SELECT word, edit_distance_long_case_ratio(word, 'Baylor/M') AS ratio
-FROM en_us_dict
-ORDER BY ratio DESC
-LIMIT 100;
-
-SELECT word, edit_distance_long_ratio(word, 'Baylor/M') AS ratio
+SELECT word, levenshtein_case_ratio(word, 'Baylor/M') AS ratio
 FROM en_us_dict
 ORDER BY ratio DESC
 LIMIT 100;
 
 SELECT word, levenshtein_ratio(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
+
+SELECT word, levenshtein_long_case_ratio(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
+
+SELECT word, levenshtein_long_ratio(word, 'Baylor/M') AS ratio
 FROM en_us_dict
 ORDER BY ratio DESC
 LIMIT 100;

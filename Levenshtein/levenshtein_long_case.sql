@@ -6,7 +6,7 @@
 
 DELIMITER $$
 
-CREATE FUNCTION `edit_distance_long_case`(
+CREATE FUNCTION `levenshtein_long_case`(
 	`s1` VARCHAR(16382) CHARSET utf32,
 	`s2` VARCHAR(16382) CHARSET utf32
 )
@@ -62,7 +62,7 @@ BEGIN
 	RETURN s1_len;
 END$$
 
-CREATE FUNCTION `edit_distance_long_case_ratio`(
+CREATE FUNCTION `levenshtein_long_case_ratio`(
 	`s1` VARCHAR(16382) CHARSET utf32,
 	`s2` VARCHAR(16382) CHARSET utf32
 )

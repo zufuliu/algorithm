@@ -1,4 +1,4 @@
--- Levenshtein distance for MySQL (case sensitive)
+-- Levenshtein distance for MySQL
 -- https://github.com/zufuliu/algorithm.git
 -- based on the C implementation in following wiki articles:
 -- https://en.wikipedia.org/wiki/Levenshtein_distance
@@ -6,7 +6,7 @@
 
 DELIMITER $$
 
-CREATE FUNCTION `edit_distance_case`(
+CREATE FUNCTION `levenshtein`(
 	`s1` VARCHAR(255) CHARSET utf32,
 	`s2` VARCHAR(255) CHARSET utf32
 )
@@ -14,7 +14,7 @@ RETURNS INT
 LANGUAGE SQL
 DETERMINISTIC
 CONTAINS SQL
-COMMENT 'Levenshtein distance (case sensitive)'
+COMMENT 'Levenshtein distance'
 BEGIN
 	DECLARE s1_len, s2_len INT;
 	DECLARE x, y INT;
@@ -37,6 +37,10 @@ BEGIN
 		SET col = CONCAT(SUBSTRING(col, 1, y), CHAR(y));
 		SET y = y + 1;
 	END WHILE;
+
+	-- case insensitive
+	SET s1 = LOWER(s1);
+	SET s2 = LOWER(s2);
 
 	SET x = 1;
 	WHILE x <= s2_len DO
@@ -62,7 +66,7 @@ BEGIN
 	RETURN s1_len;
 END$$
 
-CREATE FUNCTION `edit_distance_case_ratio`(
+CREATE FUNCTION `levenshtein_ratio`(
 	`s1` VARCHAR(255) CHARSET utf32,
 	`s2` VARCHAR(255) CHARSET utf32
 )
@@ -70,7 +74,7 @@ RETURNS INT
 LANGUAGE SQL
 DETERMINISTIC
 CONTAINS SQL
-COMMENT 'Levenshtein distance ratio (case sensitive)'
+COMMENT 'Levenshtein distance ratio'
 BEGIN
 	DECLARE s1_len, s2_len INT;
 	DECLARE x, y INT;
@@ -96,6 +100,10 @@ BEGIN
 		SET col = CONCAT(SUBSTRING(col, 1, y), CHAR(y));
 		SET y = y + 1;
 	END WHILE;
+
+	-- case insensitive
+	SET s1 = LOWER(s1);
+	SET s2 = LOWER(s2);
 
 	SET x = 1;
 	WHILE x <= s2_len DO
