@@ -23,6 +23,7 @@ BEGIN
 	DECLARE pos1 INT;
 	DECLARE pos2 INT;
 	DECLARE max_com_len INT;
+	DECLARE com_count INT;
 
 	DECLARE p INT;
 	DECLARE q INT;
@@ -57,6 +58,7 @@ BEGIN
 		SET pos1 = 0;
 		SET pos2 = 0;
 		SET max_com_len = 0;
+		SET com_count = 0;
 
 		SET p = s1_off;
 		WHILE p < s1_len DO
@@ -76,6 +78,7 @@ BEGIN
 					SET max_com_len = com_len;
 					SET pos1 = p;
 					SET pos2 = q;
+					SET com_count = com_count + 1;
 				END IF;
 
 				SET q = q + 1;
@@ -85,7 +88,7 @@ BEGIN
 
 		SET sim = sim + max_com_len;
 		IF max_com_len != 0 THEN
-			IF pos1 != 0 AND pos2 != 0 THEN
+			IF pos1 != 0 AND pos2 != 0 AND com_count > 1 THEN
 				SET stack = CONCAT(SUBSTRING(stack, 1, stack_size), CONCAT(CHAR(s1_off), CHAR(pos1), CHAR(s2_off), CHAR(pos2)));
 				SET stack_size = stack_size + 4;
 			END IF;
@@ -125,6 +128,7 @@ BEGIN
 	DECLARE pos1 INT;
 	DECLARE pos2 INT;
 	DECLARE max_com_len INT;
+	DECLARE com_count INT;
 
 	DECLARE p INT;
 	DECLARE q INT;
@@ -163,6 +167,7 @@ BEGIN
 		SET pos1 = 0;
 		SET pos2 = 0;
 		SET max_com_len = 0;
+		SET com_count = 0;
 
 		SET p = s1_off;
 		WHILE p < s1_len DO
@@ -182,6 +187,7 @@ BEGIN
 					SET max_com_len = com_len;
 					SET pos1 = p;
 					SET pos2 = q;
+					SET com_count = com_count + 1;
 				END IF;
 
 				SET q = q + 1;
@@ -191,7 +197,7 @@ BEGIN
 
 		SET sim = sim + max_com_len;
 		IF max_com_len != 0 THEN
-			IF pos1 != 0 AND pos2 != 0 THEN
+			IF pos1 != 0 AND pos2 != 0 AND com_count > 1 THEN
 				SET stack = CONCAT(SUBSTRING(stack, 1, stack_size), CONCAT(CHAR(s1_off), CHAR(pos1), CHAR(s2_off), CHAR(pos2)));
 				SET stack_size = stack_size + 4;
 			END IF;

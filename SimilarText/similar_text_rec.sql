@@ -9,7 +9,8 @@ CREATE PROCEDURE `php_similar_str`(
 	IN `s2_len` INT,
 	OUT `pos1` INT,
 	OUT `pos2` INT,
-	OUT `max_com_len` INT
+	OUT `max_com_len` INT,
+	OUT `com_count` INT
 )
 LANGUAGE SQL
 DETERMINISTIC
@@ -26,6 +27,7 @@ BEGIN
 	SET pos1 = 0;
 	SET pos2 = 0;
 	SET max_com_len = 0;
+	SET com_count = 0;
 
 	SET p = s1_off;
 	WHILE p < s1_len DO
@@ -45,6 +47,7 @@ BEGIN
 				SET max_com_len = com_len;
 				SET pos1 = p;
 				SET pos2 = q;
+				SET com_count = com_count + 1;
 			END IF;
 
 			SET q = q + 1;
@@ -70,12 +73,13 @@ BEGIN
 	DECLARE pos1 INT;
 	DECLARE pos2 INT;
 	DECLARE max_com_len INT;
+	DECLARE com_count INT;
 	DECLARE sim_sub INT;
 
-	CALL php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len, pos1, pos2, max_com_len);
+	CALL php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len, pos1, pos2, max_com_len, com_count);
 	SET sim = max_com_len;
 	IF max_com_len != 0 THEN
-		IF pos1 != 0 AND pos2 != 0 THEN
+		IF pos1 != 0 AND pos2 != 0 AND com_count > 1 THEN
 			CALL php_similar_char(s1, s1_off, pos1, s2, s2_off, pos2, sim_sub);
 			SET sim = sim + sim_sub;
 		END IF;

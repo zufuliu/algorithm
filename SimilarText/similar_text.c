@@ -8,13 +8,14 @@
  gcc -D__USE_MINGW_ANSI_STDIO -Wall -Wextra similar_text.c
 */
 
-static void php_similar_str(const char *txt1, size_t len1, const char *txt2, size_t len2, size_t *pos1, size_t *pos2, size_t *max) {
+static void php_similar_str(const char *txt1, size_t len1, const char *txt2, size_t len2, size_t *pos1, size_t *pos2, size_t *max, size_t *count) {
 	const char *p, *q;
 	const char *end1 = txt1 + len1;
 	const char *end2 = txt2 + len2;
 	size_t l;
 
 	*max = 0;
+	*count = 0;
 	for (p = txt1; p < end1; p++) {
 		for (q = txt2; q < end2; q++) {
 			for (l = 0; (p + l < end1) && (q + l < end2) && (p[l] == q[l]); l++);
@@ -22,6 +23,7 @@ static void php_similar_str(const char *txt1, size_t len1, const char *txt2, siz
 				*max = l;
 				*pos1 = p - txt1;
 				*pos2 = q - txt2;
+				*count += 1;
 			}
 		}
 	}
@@ -29,11 +31,11 @@ static void php_similar_str(const char *txt1, size_t len1, const char *txt2, siz
 
 static size_t php_similar_char(const char *txt1, size_t len1, const char *txt2, size_t len2) {
 	size_t sum;
-	size_t pos1 = 0, pos2 = 0, max;
+	size_t pos1 = 0, pos2 = 0, max, count;
 
-	php_similar_str(txt1, len1, txt2, len2, &pos1, &pos2, &max);
+	php_similar_str(txt1, len1, txt2, len2, &pos1, &pos2, &max, &count);
 	if ((sum = max) != 0) {
-		if (pos1 && pos2) {
+		if (pos1 && pos2 && count > 1) {
 			sum += php_similar_char(txt1, pos1,
 									txt2, pos2);
 		}

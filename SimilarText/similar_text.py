@@ -5,6 +5,7 @@ def php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len):
 	pos1 = 0
 	pos2 = 0
 	max_com_len = 0
+	com_count= 0
 
 	p = s1_off
 	while p < s1_len:
@@ -22,17 +23,18 @@ def php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len):
 				max_com_len = com_len
 				pos1 = p
 				pos2 = q
+				com_count += 1
 
 			q += 1
 		p += 1
 
-	return pos1, pos2, max_com_len
+	return pos1, pos2, max_com_len, com_count
 
 def php_similar_char(s1, s1_off, s1_len, s2, s2_off, s2_len):
-	pos1, pos2, max_com_len = php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len)
+	pos1, pos2, max_com_len, com_count = php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len)
 	sim = max_com_len
 	if max_com_len:
-		if pos1 and pos2:
+		if pos1 and pos2 and com_count > 1:
 			sim += php_similar_char(s1, s1_off, pos1, s2, s2_off, pos2)
 
 		pos1 += max_com_len
@@ -67,10 +69,10 @@ def php_similar_char2(s1, s1_len, s2, s2_len):
 	stack = [(0, s1_len, 0, s2_len)]
 	while stack:
 		s1_off, s1_len, s2_off, s2_len = stack.pop()
-		pos1, pos2, max_com_len = php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len)
+		pos1, pos2, max_com_len, com_count = php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len)
 		sim += max_com_len
 		if max_com_len:
-			if pos1 and pos2:
+			if pos1 and pos2 and com_count > 1:
 				stack.append((s1_off, pos1, s2_off, pos2))
 
 			pos1 += max_com_len
@@ -121,7 +123,7 @@ def similar_text3(s1, s2):
 	while stack:
 		s1_off, s1_len, s2_off, s2_len = stack.pop()
 		#pos1, pos2, max_com_len = php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len)
-		pos1, pos2, max_com_len = 0, 0, 0
+		pos1, pos2, max_com_len, com_count = 0, 0, 0, 0
 		p = s1_off
 		while p < s1_len:
 			q = s2_off
@@ -138,13 +140,14 @@ def similar_text3(s1, s2):
 					max_com_len = com_len
 					pos1 = p
 					pos2 = q
+					com_count += 1
 
 				q += 1
 			p += 1
 
 		sim += max_com_len
 		if max_com_len:
-			if pos1 and pos2:
+			if pos1 and pos2 and com_count > 1:
 				stack.append((s1_off, pos1, s2_off, pos2))
 
 			pos1 += max_com_len
@@ -158,6 +161,12 @@ def similar_text3(s1, s2):
 	sim = max_len - sim
 	return sim, percent
 
+
+def _test():
+	s1 = 'PHP IS GREAT'
+	s2 = 'WITH MYSQL'
+	print(similar_text(s1, s2))
+	print(similar_text(s2, s1))
 
 def _test_stack_size():
 	# max stack size = ((min(s1_len, s2_len) + 1)//2)*4
