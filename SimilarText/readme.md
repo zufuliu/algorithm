@@ -16,7 +16,7 @@
 
 * similar\_text\_rec.sql
 
-	The MySQL implementation use recursion.
+	The MySQL implementation use recursion, which may result in "MySQL error 1436: Thread stack overrun.".
 
 ## References
 * http://php.net/manual/en/function.similar-text.php

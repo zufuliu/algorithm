@@ -63,6 +63,8 @@ size_t similar_text(const char *txt1, const char *txt2, double *percent) {
 
 	sim = php_similar_char(txt1, len1, txt2, len2);
 	*percent = sim * 200.0 / (len1 + len2);
+	len1 = (len1 > len2)? len1 : len2;
+	sim = len1 - sim;
 	return sim;
 }
 
