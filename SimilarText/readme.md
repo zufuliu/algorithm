@@ -1,10 +1,14 @@
-# Text Similarity in PHP
+# Text Similarity
+
+## Algorithm List
+
+* PHP's `similar_text()`
 
 ## File List
 
 * similar\_text.c
 
-	The C implementation.
+	The C implementation of PHP's `similar_text()`.
 
 * similar\_text.py
 
@@ -12,11 +16,11 @@
 
 * similar\_text.sql
 
-	The MySQL implementation.
+	The MySQL implementation of PHP's `similar_text()`.
 
 * similar\_text\_rec.sql
 
-	The MySQL implementation use recursion, which may result in "MySQL error 1436: Thread stack overrun.".
+	The MySQL implementation of PHP's `similar_text()` using recursion, which may result in "MySQL error 1436: Thread stack overrun.".
 
 ## References
 * http://php.net/manual/en/function.similar-text.php

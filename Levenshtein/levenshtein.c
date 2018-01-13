@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <float.h>
 
 static inline uint32_t max(uint32_t a, uint32_t b) {
 	return a < b ? b : a;
@@ -50,7 +51,7 @@ uint32_t levenshtein(const char *s1, const char *s2) {
 	y = max(s1_len, s2_len);
 	double ratio = x / (double)y;
 	ratio = 100 * (1 - ratio);
-	printf("s1_len=%u, s2_len=%u, dist=%u, ratio=%f\n", s1_len, s2_len, x, ratio);
+	printf("s1_len=%u, s2_len=%u, dist=%u, ratio=%.*g\n", s1_len, s2_len, x, DBL_DECIMAL_DIG, ratio);
 	return x;
 }
 

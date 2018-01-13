@@ -17,12 +17,9 @@ DETERMINISTIC
 CONTAINS SQL
 COMMENT ''
 BEGIN
-	DECLARE p INT;
-	DECLARE q INT;
+	DECLARE p, q INT;
 	DECLARE com_len INT;
-
-	DECLARE p1 INT;
-	DECLARE q1 INT;
+	DECLARE p1, q1 INT;
 
 	SET pos1 = 0;
 	SET pos2 = 0;
@@ -70,10 +67,8 @@ DETERMINISTIC
 CONTAINS SQL
 COMMENT ''
 BEGIN
-	DECLARE pos1 INT;
-	DECLARE pos2 INT;
-	DECLARE max_com_len INT;
-	DECLARE com_count INT;
+	DECLARE pos1, pos2 INT;
+	DECLARE max_com_len, com_count INT;
 	DECLARE sim_sub INT;
 
 	CALL php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len, pos1, pos2, max_com_len, com_count);
@@ -103,8 +98,7 @@ DETERMINISTIC
 CONTAINS SQL
 COMMENT 'PHP similar_text'
 BEGIN
-	DECLARE s1_len INT;
-	DECLARE s2_len INT;
+	DECLARE s1_len, s2_len INT;
 	DECLARE sim INT DEFAULT 0;
 	DECLARE max_len INT;
 
@@ -135,8 +129,7 @@ DETERMINISTIC
 CONTAINS SQL
 COMMENT 'PHP similar_text'
 BEGIN
-	DECLARE s1_len INT;
-	DECLARE s2_len INT;
+	DECLARE s1_len, s2_len INT;
 	DECLARE sim INT;
 	DECLARE sum_len INT;
 

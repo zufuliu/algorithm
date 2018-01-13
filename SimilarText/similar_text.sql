@@ -10,27 +10,19 @@ DETERMINISTIC
 CONTAINS SQL
 COMMENT 'PHP similar_text'
 BEGIN
-	DECLARE s1_len INT;
-	DECLARE s2_len INT;
+	DECLARE s1_len, s2_len INT;
 	DECLARE sim INT DEFAULT 0;
 	DECLARE max_len INT;
 
 	DECLARE stack VARBINARY(512);
 	DECLARE stack_size INT;
 
-	DECLARE s1_off INT;
-	DECLARE s2_off INT;
-	DECLARE pos1 INT;
-	DECLARE pos2 INT;
-	DECLARE max_com_len INT;
-	DECLARE com_count INT;
-
-	DECLARE p INT;
-	DECLARE q INT;
+	DECLARE s1_off, s2_off INT;
+	DECLARE pos1, pos2 INT;
+	DECLARE max_com_len, com_count INT;
+	DECLARE p, q INT;
 	DECLARE com_len INT;
-
-	DECLARE p1 INT;
-	DECLARE q1 INT;
+	DECLARE p1, q1 INT;
 
 	SET s1_len = CHAR_LENGTH(IFNULL(s1, ''));
 	SET s2_len = CHAR_LENGTH(IFNULL(s2, ''));
@@ -115,27 +107,19 @@ DETERMINISTIC
 CONTAINS SQL
 COMMENT 'PHP similar_text'
 BEGIN
-	DECLARE s1_len INT;
-	DECLARE s2_len INT;
+	DECLARE s1_len, s2_len INT;
 	DECLARE sim INT DEFAULT 0;
 	DECLARE sum_len INT;
 
 	DECLARE stack VARBINARY(512);
 	DECLARE stack_size INT;
 
-	DECLARE s1_off INT;
-	DECLARE s2_off INT;
-	DECLARE pos1 INT;
-	DECLARE pos2 INT;
-	DECLARE max_com_len INT;
-	DECLARE com_count INT;
-
-	DECLARE p INT;
-	DECLARE q INT;
+	DECLARE s1_off, s2_off INT;
+	DECLARE pos1, pos2 INT;
+	DECLARE max_com_len, com_count INT;
+	DECLARE p, q INT;
 	DECLARE com_len INT;
-
-	DECLARE p1 INT;
-	DECLARE q1 INT;
+	DECLARE p1, q1 INT;
 
 	SET s1_len = CHAR_LENGTH(IFNULL(s1, ''));
 	SET s2_len = CHAR_LENGTH(IFNULL(s2, ''));

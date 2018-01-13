@@ -58,8 +58,7 @@ BEGIN
 		SET x = x + 1;
 	END WHILE;
 
-	SET s1_len = ORD(SUBSTRING(col, s1_len + 1, 1));
-	RETURN s1_len;
+	RETURN ORD(SUBSTRING(col, s1_len + 1, 1));
 END$$
 
 CREATE FUNCTION `levenshtein_long_case_ratio`(
