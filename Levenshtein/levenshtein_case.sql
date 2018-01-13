@@ -20,7 +20,7 @@ BEGIN
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
 	DECLARE s2_ch INT;
-	DECLARE col VARBINARY(256) DEFAULT ' ';
+	DECLARE col VARBINARY(256) DEFAULT '';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
 	-- https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
@@ -75,7 +75,7 @@ BEGIN
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
 	DECLARE s2_ch INT;
-	DECLARE col VARBINARY(256) DEFAULT ' ';
+	DECLARE col VARBINARY(256) DEFAULT '';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
 	-- https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance

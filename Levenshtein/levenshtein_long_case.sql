@@ -20,7 +20,7 @@ BEGIN
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
 	DECLARE s2_ch INT;
-	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT ' ';
+	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT '';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
 	-- https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
@@ -75,7 +75,7 @@ BEGIN
 	DECLARE x, y INT;
 	DECLARE old_diag, last_diag INT;
 	DECLARE s2_ch INT;
-	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT ' ';
+	DECLARE col VARCHAR(16383) CHARSET utf16 COLLATE utf16_bin DEFAULT '';
 
 	-- https://en.wikipedia.org/wiki/Levenshtein_distance
 	-- https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
