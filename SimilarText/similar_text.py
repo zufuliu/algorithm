@@ -167,6 +167,7 @@ def _test():
 	s2 = 'WITH MYSQL'
 	print(similar_text(s1, s2))
 	print(similar_text(s2, s1))
+	print(similar_text('12345678901234567890', '12345678991234567890'))
 
 def _test_stack_size():
 	# max stack size = ((min(s1_len, s2_len) + 1)//2)*4

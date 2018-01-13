@@ -4,6 +4,7 @@
 
 * Levenshtein Distance
 * Text Similarity
+* Longest Common Subsequence
 
 ## License
 

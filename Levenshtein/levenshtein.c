@@ -4,30 +4,34 @@
  * https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
-#include <stdint.h>
+
+#include <stdio.h>
 #include <float.h>
 
-static inline uint32_t max(uint32_t a, uint32_t b) {
+/*
+ MinGW-w64 GCC
+ gcc -D__USE_MINGW_ANSI_STDIO -Wall -Wextra levenshtein.c
+*/
+
+static inline size_t max(size_t a, size_t b) {
 	return a < b ? b : a;
 }
 
-static inline uint32_t min(uint32_t a, uint32_t b) {
+static inline size_t min(size_t a, size_t b) {
 	return a < b ? a : b;
 }
 
-static inline uint32_t min3(uint32_t a, uint32_t b, uint32_t c) {
+static inline size_t min3(size_t a, size_t b, size_t c) {
 	return min(min(a, b), c);
 }
 
-uint32_t levenshtein(const char *s1, const char *s2) {
-	const uint32_t s1_len = (uint32_t)strlen(s1);
-	const uint32_t s2_len = (uint32_t)strlen(s2);
-	uint32_t last_diag, old_diag;
-	uint32_t column[s1_len + 1];
-	uint32_t x, y;
+size_t levenshtein(const char *s1, const char *s2) {
+	const size_t s1_len = (size_t)strlen(s1);
+	const size_t s2_len = (size_t)strlen(s2);
+	size_t last_diag, old_diag;
+	size_t column[s1_len + 1];
+	size_t x, y;
 
 	if (s1_len == 0 || s2_len == 0) {
 		return max(s1_len, s2_len);
@@ -51,7 +55,7 @@ uint32_t levenshtein(const char *s1, const char *s2) {
 	y = max(s1_len, s2_len);
 	double ratio = x / (double)y;
 	ratio = 100 * (1 - ratio);
-	printf("s1_len=%u, s2_len=%u, dist=%u, ratio=%.*g\n", s1_len, s2_len, x, DBL_DECIMAL_DIG, ratio);
+	printf("s1_len=%zu, s2_len=%zu, dist=%zu, ratio=%.*g\n", s1_len, s2_len, x, DBL_DECIMAL_DIG, ratio);
 	return x;
 }
 
