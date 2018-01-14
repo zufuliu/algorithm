@@ -170,15 +170,18 @@ def _test():
 	print(similar_text('12345678901234567890', '12345678991234567890'))
 
 def _test_stack_size():
-	# max stack size = ((min(s1_len, s2_len) + 1)//2)*4
-	def make_str(length, ch):
-		items = ['0'] * length
-		for index in range(1, length, 2):
-			items[index] = ch
-		return ''.join(items)
+	from itertools import repeat
 
-	s1 = make_str(256, '1')
-	s2 = make_str(256, '2')
+	# without `com_count > 1` check
+	# max stack size = ((min(s1_len, s2_len) + 1)//2)*4
+	s1 = ''.join(repeat('AB', 128))
+	s2 = ''.join(repeat('AC', 128))
+	print(similar_text(s1, s2), similar_text2(s1, s2), similar_text3(s1, s2))
+
+	# with `com_count > 1` check
+	# max stack size = (1 + min(s1_len, s2_len)//5)*4
+	s1 = ''.join(repeat('ABDEF', 51))
+	s2 = ''.join(repeat('ACDEG', 51))
 	print(similar_text(s1, s2), similar_text2(s1, s2), similar_text3(s1, s2))
 
 if __name__ == '__main__':

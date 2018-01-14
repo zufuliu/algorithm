@@ -14,7 +14,7 @@ BEGIN
 	DECLARE sim INT DEFAULT 0;
 	DECLARE max_len INT;
 
-	DECLARE stack VARBINARY(512);
+	DECLARE stack VARBINARY(208);
 	DECLARE stack_size INT;
 
 	DECLARE s1_off, s2_off INT;
@@ -111,7 +111,7 @@ BEGIN
 	DECLARE sim INT DEFAULT 0;
 	DECLARE sum_len INT;
 
-	DECLARE stack VARBINARY(512);
+	DECLARE stack VARBINARY(208);
 	DECLARE stack_size INT;
 
 	DECLARE s1_off, s2_off INT;
