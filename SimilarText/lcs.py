@@ -13,18 +13,18 @@ def lcs_length(s1, s1_len, s2, s2_len):
 	while i < s1_len:
 		s1_ch = s1[i]
 		prev2 = 0
-		prev = 0
+		prev1 = 0
 		j = 0
 		while j < s2_len:
 			old_diag = col[j]
 			if s1_ch == s2[j]:
 				last_diag = prev2 + 1
 			else:
-				last_diag = max(old_diag, prev)
+				last_diag = max(old_diag, prev1)
 
 			col[j] = last_diag
 			prev2 = old_diag
-			prev = last_diag
+			prev1 = last_diag
 			j += 1
 		i += 1
 

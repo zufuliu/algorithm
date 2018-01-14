@@ -13,7 +13,7 @@ BEGIN
 	DECLARE s1_len, s2_len INT;
 	DECLARE max_len INT;
 	DECLARE i, j INT;
-	DECLARE prev2, prev, old_diag, last_diag INT;
+	DECLARE prev2, prev1, old_diag, last_diag INT;
 	DECLARE s1_ch INT;
 	DECLARE col VARBINARY(255) DEFAULT '';
 
@@ -33,19 +33,19 @@ BEGIN
 	WHILE i <= s1_len DO
 		SET s1_ch = ORD(SUBSTRING(s1, i, 1));
 		SET prev2 = 0;
-		SET prev = 0;
+		SET prev1 = 0;
 		SET j = 1;
 		WHILE j <= s2_len DO
 			SET old_diag = ORD(SUBSTRING(col, j, 1));
 			IF s1_ch = ORD(SUBSTRING(s2, j, 1)) THEN
 				SET last_diag = prev2 + 1;
 			ELSE
-				SET last_diag = GREATEST(old_diag, prev);
+				SET last_diag = GREATEST(old_diag, prev1);
 			END IF;
 			-- SET col = replace_char_at(col, CHAR(last_diag), j);
 			SET col = CONCAT(SUBSTRING(col, 1, j - 1), CHAR(last_diag), SUBSTRING(col, j + 1, s2_len - j));
 			SET prev2 = old_diag;
-			SET prev = last_diag;
+			SET prev1 = last_diag;
 			SET j = j + 1;
 		END WHILE;
 		SET i = i + 1;
@@ -67,7 +67,7 @@ BEGIN
 	DECLARE s1_len, s2_len INT;
 	DECLARE sum_len INT;
 	DECLARE i, j INT;
-	DECLARE prev2, prev, old_diag, last_diag INT;
+	DECLARE prev2, prev1, old_diag, last_diag INT;
 	DECLARE s1_ch INT;
 	DECLARE col VARBINARY(255) DEFAULT '';
 
@@ -90,19 +90,19 @@ BEGIN
 	WHILE i <= s1_len DO
 		SET s1_ch = ORD(SUBSTRING(s1, i, 1));
 		SET prev2 = 0;
-		SET prev = 0;
+		SET prev1 = 0;
 		SET j = 1;
 		WHILE j <= s2_len DO
 			SET old_diag = ORD(SUBSTRING(col, j, 1));
 			IF s1_ch = ORD(SUBSTRING(s2, j, 1)) THEN
 				SET last_diag = prev2 + 1;
 			ELSE
-				SET last_diag = GREATEST(old_diag, prev);
+				SET last_diag = GREATEST(old_diag, prev1);
 			END IF;
 			-- SET col = replace_char_at(col, CHAR(last_diag), j);
 			SET col = CONCAT(SUBSTRING(col, 1, j - 1), CHAR(last_diag), SUBSTRING(col, j + 1, s2_len - j));
 			SET prev2 = old_diag;
-			SET prev = last_diag;
+			SET prev1 = last_diag;
 			SET j = j + 1;
 		END WHILE;
 		SET i = i + 1;

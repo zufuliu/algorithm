@@ -36,18 +36,18 @@ size_t lcs_similarity(const char *s1, const char *s2, double *percent) {
 
 	for (size_t i = 0; i < s1_len; i++) {
 		char s1_ch = s1[i];
-		size_t prev2 = 0,  prev = 0;
+		size_t prev2 = 0,  prev1 = 0;
 		for (size_t j = 0; j < s2_len; j++) {
 			size_t old_diag = column[j], last_diag;
 			if (s1_ch == s2[j]) {
 				last_diag = prev2 + 1;
 			} else {
-				last_diag = (old_diag > prev)? old_diag : prev;
+				last_diag = (old_diag > prev1)? old_diag : prev1;
 			}
 
 			column[j] = last_diag;
 			prev2 = old_diag;
-			prev = last_diag;
+			prev1 = last_diag;
 		}
 	}
 
