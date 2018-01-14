@@ -15,7 +15,7 @@
 
 	The Python implementation of LCS.
 
-* lcs.sql
+* lcs.sql, lcs\_long.sql, 
 
 	The MySQL implementation of LCS.
 
@@ -46,6 +46,11 @@ Test data can be found in *Levenshtein*, queries taken from test.sql:
 ```SQL
 
 SELECT word, lcs_similarity(word, 'Baylor/M') AS ratio
+FROM en_us_dict
+ORDER BY ratio DESC
+LIMIT 100;
+
+SELECT word, lcs_long_similarity(word, 'Baylor/M') AS ratio
 FROM en_us_dict
 ORDER BY ratio DESC
 LIMIT 100;
