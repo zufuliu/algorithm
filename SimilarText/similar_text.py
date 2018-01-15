@@ -118,11 +118,23 @@ def similar_text3(s1, s2):
 	#s2 = s2.lower()
 	#sim = php_similar_char2(s1, s1_len, s2, s2_len)
 	sim = 0
-	stack = [(0, s1_len, 0, s2_len)]
-	stack_size = 1
-	while stack:
-		s1_off, s1_len, s2_off, s2_len = stack.pop()
-		#pos1, pos2, max_com_len = php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len)
+	max_stack_size = (1 + min(s1_len, s2_len)//5) * 4;
+	stack = [0] * max_stack_size
+	#stack = [(0, s1_len, 0, s2_len)]
+	stack[0] = 0
+	stack[1] = s1_len
+	stack[2] = 0
+	stack[3] = s2_len
+	stack_size = 4
+	max_stack_size = stack_size
+	while stack_size:
+		#s1_off, s1_len, s2_off, s2_len = stack.pop()
+		s1_off = stack[stack_size - 4]
+		s1_len = stack[stack_size - 3]
+		s2_off = stack[stack_size - 2]
+		s2_len = stack[stack_size - 1]
+		stack_size -= 4
+		#pos1, pos2, max_com_len, com_count = php_similar_str(s1, s1_off, s1_len, s2, s2_off, s2_len)
 		pos1, pos2, max_com_len, com_count = 0, 0, 0, 0
 		p = s1_off
 		while p < s1_len:
@@ -148,15 +160,25 @@ def similar_text3(s1, s2):
 		sim += max_com_len
 		if max_com_len:
 			if pos1 and pos2 and com_count > 1:
-				stack.append((s1_off, pos1, s2_off, pos2))
+				#stack.append((s1_off, pos1, s2_off, pos2))
+				stack[stack_size + 0] = s1_off
+				stack[stack_size + 1] = pos1
+				stack[stack_size + 2] = s2_off
+				stack[stack_size + 3] = pos2
+				stack_size += 4
 
 			pos1 += max_com_len
 			pos2 += max_com_len
 			if pos1 < s1_len and pos2 < s2_len:
-				stack.append((pos1, s1_len, pos2, s2_len))
-			stack_size = max(stack_size, len(stack))
+				#stack.append((pos1, s1_len, pos2, s2_len))
+				stack[stack_size + 0] = pos1
+				stack[stack_size + 1] = s1_len
+				stack[stack_size + 2] = pos2
+				stack[stack_size + 3] = s2_len
+				stack_size += 4
+			max_stack_size = max(stack_size, max_stack_size)
 
-	print('stack_size:', stack_size, stack_size*4)
+	print('stack_size:', max_stack_size//4, max_stack_size, len(stack)//4, len(stack))
 	percent = sim * 200.0 / sum_len
 	sim = max_len - sim
 	return sim, percent
