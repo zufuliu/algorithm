@@ -48,14 +48,16 @@ static size_t php_similar_char(const char *txt1, size_t len1, const char *txt2, 
 	return sum;
 }
 
-size_t similar_text(const char *txt1, const char *txt2, double *percent) {
+size_t similar_text(const char *txt1, const char *txt2, size_t *distance, double *percent) {
 	size_t len1 = txt1 ? strlen(txt1) : 0;
 	size_t len2 = txt2 ? strlen(txt2) : 0;
+	size_t sum_len = len1 + len2;
 	size_t sim;
 
 	/* different from similar_text() in PHP */
 	if (len1 == 0 || len2 == 0) {
-		if (len1 + len2 == 0) {
+		*distance = sum_len;
+		if (sum_len == 0) {
 			*percent = 100;
 		} else {
 			*percent = 0;
@@ -64,9 +66,8 @@ size_t similar_text(const char *txt1, const char *txt2, double *percent) {
 	}
 
 	sim = php_similar_char(txt1, len1, txt2, len2);
-	*percent = sim * 200.0 / (len1 + len2);
-	len1 = (len1 > len2)? len1 : len2;
-	sim = len1 - sim;
+	*percent = sim * 200.0 / sum_len;
+	*distance = sum_len - 2*sim;
 	return sim;
 }
 
@@ -75,9 +76,10 @@ int main(int argc, char* argv[]) {
 	if (argc > 2) {
 		const char *txt1 = argv[1];
 		const char *txt2 = argv[2];
+		size_t distance;
 		double percent;
-		size_t sim = similar_text(txt1, txt2, &percent);
-		printf("similar_text('%s', '%s')=%zu, %.*g\n", txt1, txt2, sim, DBL_DECIMAL_DIG, percent);
+		size_t sim = similar_text(txt1, txt2, &distance, &percent);
+		printf("similar_text('%s', '%s')=%zu, %zu, %.*g\n", txt1, txt2, sim, distance, DBL_DECIMAL_DIG, percent);
 	} else {
 		printf("usage: %s txt1 txt2\n", argv[0]);
 	}

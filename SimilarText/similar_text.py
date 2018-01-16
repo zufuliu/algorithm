@@ -48,20 +48,18 @@ def similar_text(s1, s2):
 	s1_len = len(s1) if s1 else 0
 	s2_len = len(s2) if s2 else 0
 	sum_len = s1_len + s2_len
-	max_len = max(s1_len, s2_len)
 
 	# different from similar_text() in PHP
 	if s1_len == 0 or s2_len == 0:
 		if sum_len == 0:
-			return max_len, 100
-		return max_len, 0
+			return 0, sum_len, 100
+		return 0, sum_len, 0
 
 	#s1 = s1.lower()
 	#s2 = s2.lower()
 	sim = php_similar_char(s1, 0, s1_len, s2, 0, s2_len)
 	percent = sim * 200.0 / sum_len
-	sim = max_len - sim
-	return sim, percent
+	return sim, sum_len - 2*sim, percent
 
 
 def php_similar_char2(s1, s1_len, s2, s2_len):
@@ -86,33 +84,30 @@ def similar_text2(s1, s2):
 	s1_len = len(s1) if s1 else 0
 	s2_len = len(s2) if s2 else 0
 	sum_len = s1_len + s2_len
-	max_len = max(s1_len, s2_len)
 
 	# different from similar_text() in PHP
 	if s1_len == 0 or s2_len == 0:
 		if sum_len == 0:
-			return max_len, 100
-		return max_len, 0
+			return 0, sum_len, 100
+		return 0, sum_len, 0
 
 	#s1 = s1.lower()
 	#s2 = s2.lower()
 	sim = php_similar_char2(s1, s1_len, s2, s2_len)
 	percent = sim * 200.0 / sum_len
-	sim = max_len - sim
-	return sim, percent
+	return sim, sum_len - 2*sim, percent
 
 
 def similar_text3(s1, s2):
 	s1_len = len(s1) if s1 else 0
 	s2_len = len(s2) if s2 else 0
 	sum_len = s1_len + s2_len
-	max_len = max(s1_len, s2_len)
 
 	# different from similar_text() in PHP
 	if s1_len == 0 or s2_len == 0:
 		if sum_len == 0:
-			return max_len, 100
-		return max_len, 0
+			return 0, sum_len, 100
+		return 0, sum_len, 0
 
 	#s1 = s1.lower()
 	#s2 = s2.lower()
@@ -180,8 +175,7 @@ def similar_text3(s1, s2):
 
 	print('stack_size:', max_stack_size//4, max_stack_size, len(stack)//4, len(stack))
 	percent = sim * 200.0 / sum_len
-	sim = max_len - sim
-	return sim, percent
+	return sim, sum_len - 2*sim, percent
 
 
 def _test():

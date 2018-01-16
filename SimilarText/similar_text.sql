@@ -12,7 +12,7 @@ COMMENT 'PHP similar_text'
 BEGIN
 	DECLARE s1_len, s2_len INT;
 	DECLARE sim INT DEFAULT 0;
-	DECLARE max_len INT;
+	DECLARE sum_len INT;
 
 	DECLARE stack VARBINARY(208);
 	DECLARE stack_size INT;
@@ -26,10 +26,10 @@ BEGIN
 
 	SET s1_len = CHAR_LENGTH(IFNULL(s1, ''));
 	SET s2_len = CHAR_LENGTH(IFNULL(s2, ''));
-	SET max_len = GREATEST(s1_len, s2_len);
+	SET sum_len = s1_len + s2_len;
 
 	IF s1_len = 0 OR s2_len = 0 THEN
-		RETURN max_len;
+		RETURN sum_len;
 	END IF;
 
 	-- case insensitive
@@ -94,7 +94,7 @@ BEGIN
 		END IF;
 	END WHILE;
 
-	RETURN max_len - sim;
+	RETURN sum_len - 2*sim;
 END$$
 
 CREATE FUNCTION `similar_text_ratio`(

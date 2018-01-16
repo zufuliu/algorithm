@@ -11,7 +11,7 @@ CONTAINS SQL
 COMMENT 'Longest common subsequence distance'
 BEGIN
 	DECLARE s1_len, s2_len INT;
-	DECLARE max_len INT;
+	DECLARE sum_len INT;
 	DECLARE i, j INT;
 	DECLARE prev2, prev1, old_diag, last_diag INT;
 	DECLARE s1_ch INT;
@@ -19,10 +19,10 @@ BEGIN
 
 	SET s1_len = CHAR_LENGTH(IFNULL(s1, ''));
 	SET s2_len = CHAR_LENGTH(IFNULL(s2, ''));
-	SET max_len = GREATEST(s1_len, s2_len);
+	SET sum_len = s1_len + s2_len;
 
 	IF s1_len = 0 OR s2_len = 0 THEN
-		RETURN max_len;
+		RETURN sum_len;
 	END IF;
 
 	-- case insensitive
@@ -51,7 +51,7 @@ BEGIN
 		SET i = i + 1;
 	END WHILE;
 
-	RETURN max_len - ORD(SUBSTRING(col, s2_len, 1));
+	RETURN sum_len - 2*ORD(SUBSTRING(col, s2_len, 1));
 END$$
 
 CREATE FUNCTION `lcs_similarity`(

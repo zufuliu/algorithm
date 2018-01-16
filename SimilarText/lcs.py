@@ -33,17 +33,16 @@ def lcs_length(s1, s1_len, s2, s2_len):
 def lcs_similarity(s1, s2):
 	s1_len = len(s1) if s1 else 0
 	s2_len = len(s2) if s2 else 0
-	max_len = max(s1_len, s2_len)
 	sum_len = s1_len + s2_len
 
 	if s1_len == 0 or s2_len == 0:
 		if sum_len == 0:
-			return max_len, 100
-		return max_len, 0
+			return 0, sum_len, 100
+		return 0, sum_len, 0
 
 	sim = lcs_length(s1, s1_len, s2, s2_len)
 	percent = 200.0 * sim / sum_len
-	return max_len - sim, percent
+	return sim, sum_len - 2*sim, percent
 
 
 def _test():
