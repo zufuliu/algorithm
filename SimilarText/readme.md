@@ -4,6 +4,7 @@
 
 * PHP's `similar_text()`
 * Longest Common Subsequence
+* Sørensen–Dice coefficient
 
 ## File List
 
@@ -76,3 +77,8 @@ LIMIT 100;
 * [An O(ND) Difference Algorithm and Its Variations](http://xmailserver.org/diff2.pdf)
 * [An O(NP) Sequence Comparison Algorithm](https://publications.mpi-cbg.de/Wu_1990_6334.pdf)
 * [Diff Strategies](https://neil.fraser.name/writing/diff/)
+* [The implementations of "An O(NP) Sequence Comparison Algorithm"](https://github.com/cubicdaiya/onp)
+* [Sørensen–Dice coefficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient)
+* [Algorithm Implementation/Strings/Dice's coefficient](https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Dice%27s_coefficient)
+* [How to Strike a Match](http://www.catalysoft.com/articles/StrikeAMatch.html)
+* [A better similarity ranking algorithm for variable length strings](https://stackoverflow.com/questions/653157/a-better-similarity-ranking-algorithm-for-variable-length-strings)

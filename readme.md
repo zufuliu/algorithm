@@ -5,6 +5,7 @@
 * Levenshtein Distance
 * Text Similarity
 * Longest Common Subsequence
+* Sørensen–Dice coefficient
 
 ## License
 
